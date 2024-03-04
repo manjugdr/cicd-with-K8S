@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        KUBECONFIG = '/var/lib/kubelet/config' // Specify the path to your Kubernetes configuration file
+        KUBECONFIG = '/var/lib/jenkins/workspace/k8s/' // Specify the path to your Kubernetes configuration file
     }
     stages{
         stage('Build Maven'){
