@@ -11,7 +11,7 @@ pipeline {
             steps{
                 script{
                        sh 'cd /var/lib/jenkins/workspace/k8s'
-                       sh 'sudo docker.build -t manjugdr/endtoendproject:v1 .'
+                       def dockerImage = docker.build('manjugdr/endtoendproject:v1', '-f /var/lib/jenkins/workspace/k8s/Dockerfile .')
                 }
             }
         }
