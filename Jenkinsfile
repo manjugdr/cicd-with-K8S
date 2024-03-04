@@ -1,5 +1,7 @@
 pipeline {
     agent any
+    environment {
+        KUBECONFIG = '/etc/kubernetes' // Specify the path to your Kubernetes configuration file
     stages{
         stage('Build Maven'){
             steps{
@@ -26,7 +28,7 @@ pipeline {
        stage('Deploy to k8s'){
                  steps{
                 script{
-                     sh "kubectl apply -f /var/lib/jenkins/workspace/k8s/deploymentservice.yaml"
+                     sh "kubectl --kubeconfig=$KUBECONFIG apply -f /var/lib/jenkins/workspace/k8s/deploymentservice.yaml"
                 }
             }
         }
