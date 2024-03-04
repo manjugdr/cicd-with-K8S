@@ -1,19 +1,16 @@
 pipeline {
     agent any
-    environment {
-        KUBECONFIG = '/etc/kubernetes' // Specify the path to your Kubernetes configuration file
     stages{
         stage('Build Maven'){
             steps{
-                git url:'https://github.com/manjugdr/cicd-with-k8s/', branch: "master"
+                git url:'https://github.com/manjugdr/cicd-with-K8S/', branch: "master"
                sh 'mvn clean install'
             }
         }
         stage('Build docker image'){
             steps{
                 script{
-                       sh 'cd /var/lib/jenkins/workspace/k8s'
-                       def dockerImage = docker.build('manjugdr/endtoendproject:v1', '-f /var/lib/jenkins/workspace/k8s/Dockerfile .')
+                    sh 'docker build -t manjugdr/endtoendproject:v1 .'
                 }
             }
         }
@@ -25,13 +22,16 @@ pipeline {
                 }
             }
         }
-       stage('Deploy to k8s'){
-                 steps{
+        
+        
+        stage('Deploy to k8s'){
+            when{ expression {env.GIT_BRANCH == 'origin/master'}}
+            steps{
                 script{
-                     sh "kubectl --kubeconfig=$KUBECONFIG apply -f /var/lib/jenkins/workspace/k8s/deploymentservice.yaml"
+                     kubernetesDeploy (configs: 'deploymentservice.yaml' ,kubeconfigId: 'k8sconfigpwd')
+                   
                 }
             }
         }
     }
-}
 }
