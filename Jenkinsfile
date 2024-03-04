@@ -10,7 +10,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    def dockerImage = docker.build('manjugdr/endtoendproject:v1', '-f /var/lib/jenkins/workspace/k8s/Dockerfile .')
+                    def dockerImage = sudo docker.build('manjugdr/endtoendproject:v1', '-f /var/lib/jenkins/workspace/k8s/Dockerfile .')
                 }
             }
         }
