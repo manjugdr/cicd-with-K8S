@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        KUBECONFIG = '/etc/kubernetes' // Specify the path to your Kubernetes configuration file
+        KUBECONFIG = '/etc/kubernetes/kubeconfig' // Specify the path to your Kubernetes configuration file
     }
     stages{
         stage('Build Maven'){
