@@ -29,7 +29,7 @@ pipeline {
                         steps{
                 script{
                     sh 'cd /var/lib/jenkins/workspace/k8s/'
-                    sh 'kubectl apply -f deploymentservice.yaml'
+                    sh 'sudo kubectl apply -f deploymentservice.yaml'
                    
                 }
             }
