@@ -10,7 +10,8 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'sudo docker build -t manjugdr/endtoendproject:v1'
+                    sh 'sudo su'
+                    sh 'docker build -t manjugdr/endtoendproject:v1 .'
                 }
             }
         }
