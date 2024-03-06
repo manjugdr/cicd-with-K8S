@@ -17,7 +17,7 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
                         sh 'scp -i chaithra.pem /var/lib/jenkins/workspace/tes-project-k8s/target/devops-integration.jar ubuntu@172.31.29.59:/home/ubuntu/'
                         sh 'scp -i chaithra.pem /var/lib/jenkins/workspace/tes-project-k8s/Dockerfile ubuntu@172.31.29.59:/home/ubuntu/'
-                        sh 'docker build -t manjugdr/endtoendproject:v1 .'
+                        sh 'sudo docker build -t manjugdr/endtoendproject:v1 .'
                 }
             }
         }
