@@ -30,7 +30,7 @@ pipeline {
         script {
             sshagent(['sshkeypair']) {
                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.24.37"
-                sh 'scp -i chaithra.pem /var/lib/jenkins/workspace/tes-project-k8s/ -r * ubuntu@172.31.24.37'
+                sh 'scp -i chaithra.pem -r /var/lib/jenkins/workspace/tes-project-k8s/ * ubuntu@172.31.24.37 /home/ubuntu/'
           kubernetesDeploy(configs: "deploymentservice.yaml", kubeconfigId: "kubernetes")               
                 }
             }
