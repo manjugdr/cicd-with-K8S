@@ -24,12 +24,15 @@ pipeline {
           }
           stage('Docker login') {
             steps {
+                sshagent(['sshkeypair']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
                     sh 'docker push manjugdr/endtoendproject:v1'
                 }
             }
         }
+          }
        stage('Deploying App to Kubernetes') {
       steps {
         script {
