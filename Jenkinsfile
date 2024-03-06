@@ -26,10 +26,12 @@ pipeline {
             }
         }
         stage('K8S login'){
+            steps {
             sshagent(['sshkeypair']) {
                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.24.37"
             }
         }
+        }    
            stage('Deploying App to Kubernetes') {
       steps {
         script {
