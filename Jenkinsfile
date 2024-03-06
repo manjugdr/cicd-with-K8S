@@ -13,15 +13,15 @@ pipeline {
           stage('Build docker image'){
             steps{
                     script{
-                        sshagent(['sshkeypair']) {
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
-                        sh 'scp -i chaithra.pem /var/lib/jenkins/workspace/tes-project-k8s/target/devops-integration.jar ubuntu@172.31.29.59:/home/ubuntu/'
-                        sh 'scp -i chaithra.pem /var/lib/jenkins/workspace/tes-project-k8s/Dockerfile ubuntu@172.31.29.59:/home/ubuntu/'
+                       // sshagent(['sshkeypair']) {
+                       // sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
+                        // sh 'scp -i chaithra.pem /var/lib/jenkins/workspace/tes-project-k8s/target/devops-integration.jar ubuntu@172.31.29.59:/home/ubuntu/'
+                        // sh 'scp -i chaithra.pem /var/lib/jenkins/workspace/tes-project-k8s/Dockerfile ubuntu@172.31.29.59:/home/ubuntu/'
                         sh 'docker build -t manjugdr/endtoendproject:v1 .'
                 }
             }
         }
-          }
+         // }
           stage('Docker login') {
             steps {
                 sshagent(['sshkeypair']) {
