@@ -10,13 +10,16 @@ pipeline {
                sh 'mvn clean install'
             }
         }
-        stage('Build docker image'){
+          stage('Build docker image'){
             steps{
-                script{
-                    sh 'docker build -t manjugdr/endtoendproject:v1 .'
+                    script{
+                        sshagent(['sshkeypair']) {
+                       sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
+                       sh 'docker build -t manjugdr/endtoendproject:v1 .'
                 }
             }
         }
+          }
           stage('Docker login') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
