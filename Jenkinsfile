@@ -20,6 +20,7 @@ pipeline {
                 }
             }
         }
+         }
         stage('Docker login') {
             steps {
                 sshagent(['sshkeypair']) {
