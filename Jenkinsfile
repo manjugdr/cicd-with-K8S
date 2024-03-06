@@ -35,6 +35,9 @@ pipeline {
            stage('Deploying App to Kubernetes') {
       steps {
         script {
+            sshagent(['sshkeypair']) {
+                       sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.24.37"
+                sh 'scp -i chaithra.pem /var/lib/jenkins/workspace/tes-project-k8s/ ubuntu@172.31.24.37'
           kubernetesDeploy(configs: "deploymentservice.yaml", kubeconfigId: "kubernetes")               
                 }
             }
