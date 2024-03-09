@@ -14,13 +14,13 @@ pipeline {
             steps {
                 nexusArtifactUploader artifacts: [
                     [
-                      artifactId: 'devops-integration', 
+                      artifactId: 'spring-boot-starter-parent', 
                       classifier: '', 
                       file: 'target/devops-integration.jar', 
                       type: 'jar']
                 ], 
                 credentialsId: 'nexus3', 
-                groupId: 'com.truelearning', 
+                groupId: 'org.springframework.boot', 
                 nexusUrl: '54.82.229.178:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
