@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Publish to Nexus') {
             steps{
-              nexusArtifactUploader artifacts: [[artifactId: 'devops-integration', classifier: '', file: 'target/devops-integration.jar', type: 'jar']], credentialsId: 'nexus3', groupId: 'com.truelearning', nexusUrl: '54.82.229.178:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'endpoint', version: '0.0.1-SNAPSHOT' 
+              nexusArtifactUploader artifacts: [[artifactId: 'devops-integration', classifier: '', file: 'target/devops-integration.jar', type: 'jar']], credentialsId: 'nexus3', groupId: 'com.truelearning', nexusUrl: '54.82.229.178:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'endpoint/', version: '0.0.1-SNAPSHOT' 
            }
         }
           stage('Build docker image'){
