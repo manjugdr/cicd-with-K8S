@@ -11,23 +11,8 @@ pipeline {
             }
         }
         stage('Publish to Nexus') {
-            steps {
-                nexusArtifactUploader artifacts: [
-                    [
-                      artifactId: 'devops-integration', 
-                      classifier: '', 
-                      file: 'target/devops-integration-0.0.1.jar', 
-                      type: 'jar']
-                ], 
-                credentialsId: 'nexus3', 
-                groupId: 'com.truelearning', 
-                nexusUrl: 'http://54.82.229.178:8081', 
-                nexusVersion: 'nexus3', 
-                protocol: 'http', 
-                repository: 'http://54.82.229.178:8081/repository/simpleapp/', 
-                version: '0.0.1'
-            }
-        }
+                nexusArtifactUploader artifacts: [[artifactId: 'devops-integration-0.0.1', classifier: '', file: 'target/devops-integration-0.0.1.jar', type: 'jar']], credentialsId: 'nexus3', groupId: 'in.ashokit', nexusUrl: 'http://54.82.229.178:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'ashokit-SNAPSHOT-repository', version: '0.0.1-SNAPSHOT'
+           }
           stage('Build docker image'){
             steps{
                     script{
