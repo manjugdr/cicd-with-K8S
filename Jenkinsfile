@@ -10,6 +10,24 @@ pipeline {
                sh 'mvn clean install'
             }
         }
+        stage('Publish to Nexus') {
+            steps {
+                nexusArtifactUploader artifacts: [
+                    [
+                      artifactId: 'devops-integration', 
+                      classifier: '', 
+                      file: 'target/devops-integration-0.0.1.war', 
+                      type: 'war']
+                ], 
+                credentialsId: 'nexus3', 
+                groupId: 'com.truelearning', 
+                nexusUrl: '172.31.22.62:8081', 
+                nexusVersion: 'nexus3', 
+                protocol: 'http', 
+                repository: 'http://54.82.229.178:8081/repository/simpleapp/', 
+                version: '0.0.1'
+            }
+        }
           stage('Build docker image'){
             steps{
                     script{
