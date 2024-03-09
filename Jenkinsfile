@@ -17,7 +17,7 @@ pipeline {
                       artifactId: 'devops-integration', 
                       classifier: '', 
                       file: 'target/devops-integration-0.0.1.jar', 
-                      type: 'war']
+                      type: 'jar']
                 ], 
                 credentialsId: 'nexus3', 
                 groupId: 'com.truelearning', 
