@@ -10,23 +10,23 @@ pipeline {
                sh 'mvn clean install'
             }
         }
-        stage('Publish to Nexus') {
+         stage('Publish to Nexus') {
             steps {
                 nexusArtifactUploader artifacts: [
                     [
-                      artifactId: 'spring-boot-starter-parent', 
+                      artifactId: 'devops-integration', 
                       classifier: '', 
-                      file: 'target/devops-integration.jar', 
-                      type: 'jar']
+                      file: 'target/devops-integration-0.0.1.war', 
+                      type: 'war']
                 ], 
                 credentialsId: 'nexus3', 
-                groupId: 'org.springframework.boot', 
-                nexusUrl: '54.82.229.178:8081', 
+                groupId: 'com.truelearning', 
+                nexusUrl: '172.31.22.62:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'http://54.82.229.178:8081/repository/simpleapp/', 
-                version: ''    
-         }
+                version: '0.0.1'
+            }
         }
           stage('Build docker image'){
             steps{
