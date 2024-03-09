@@ -15,7 +15,7 @@ pipeline {
                     script{
                        sshagent(['sshkeypair']) {
                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
-                       sh 'scp -i chaithra.pem -r /var/lib/jenkins/workspace/tes-project-k8s/ ubuntu@172.31.29.59:/home/ubuntu/tes-project-k8s'
+                       sh 'sudo scp -i chaithra.pem -r /var/lib/jenkins/workspace/tes-project-k8s/ ubuntu@172.31.29.59:/home/ubuntu/tes-project-k8s'
                        sh 'sudo docker build -t manjugdr/endtoendproject:v1 .'
                 }
             }
