@@ -25,7 +25,8 @@ pipeline {
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'http://54.82.229.178:8081/repository/simpleapp/', 
-                            }
+                version: ''    
+         }
         }
           stage('Build docker image'){
             steps{
