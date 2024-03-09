@@ -16,7 +16,7 @@ pipeline {
                     [
                       artifactId: 'devops-integration', 
                       classifier: '', 
-                      file: 'target/devops-integration.jar', 
+                      file: 'target/devops-integration-0.0.1.jar', 
                       type: 'jar']
                 ], 
                 credentialsId: 'nexus3', 
