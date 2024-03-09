@@ -10,7 +10,7 @@ pipeline {
                sh 'mvn clean install'
             }
         }
-         stage('Publish to Nexus') {
+        stage('Publish to Nexus') {
             steps {
                 nexusArtifactUploader artifacts: [
                     [
@@ -21,7 +21,7 @@ pipeline {
                 ], 
                 credentialsId: 'nexus3', 
                 groupId: 'com.truelearning', 
-                nexusUrl: 'http://54.82.229.178:8081/', 
+                nexusUrl: 'http://54.82.229.178:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'http://54.82.229.178:8081/repository/simpleapp/', 
