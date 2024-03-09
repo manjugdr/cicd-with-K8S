@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.truelearning</groupId>
-	<artifactId>devops-integration-0.0.1</artifactId>
+	<artifactId>devops-integration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>devops-integration</name>
 	<description>Demo project for Spring Boot</description>
@@ -57,7 +57,7 @@
 				<artifactId>git-commit-id-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>devops-integration-0.0.1</finalName>
+		<finalName>devops-integration</finalName>
 	</build>
 
 </project>
