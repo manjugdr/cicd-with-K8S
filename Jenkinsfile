@@ -4,10 +4,25 @@ pipeline {
         KUBECONFIG = '/var/lib/jenkins/workspace/k8s/' // Specify the path to your Kubernetes configuration file
     }
     stages{
-        stage('Build Maven'){
+        stage('Git project Clone'){
             steps{
                 git url:'https://github.com/manjugdr/cicd-with-K8S/', branch: "master"
-               sh 'mvn clean install'
+                }
+        }
+         stage('Static Code Analysis') {
+      environment {
+        SONAR_URL = "http://172.31.29.59:9000"
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
+          sh 'cd /var/lib/jenkins/workspace/tes-project-k8s && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+        }
+      }
+    }
+        stages{
+        stage('Build Maven'){
+            steps{
+                    sh 'mvn clean install'
             }
         }
         stage('Publish to Nexus') {
@@ -26,16 +41,7 @@ pipeline {
             }
         }
          }
-        stage('Static Code Analysis') {
-      environment {
-        SONAR_URL = "http://172.31.29.59:9000"
-      }
-      steps {
-        withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd /var/lib/jenkins/workspace/tes-project-k8s && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-        }
-      }
-    }
+       
         stage('Docker login') {
             steps {
                 sshagent(['sshkeypair']) {
