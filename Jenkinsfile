@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Publish to Nexus') {
             steps{
-              nexusArtifactUploader artifacts: [[artifactId: 'devops-integration', classifier: '', file: 'target/devops-integration.jar', type: 'jar']], credentialsId: 'nexus3', groupId: 'com.truelearning', nexusUrl: '54.82.229.178:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'entpoint/', version: '0.0.1-SNAPSHOT' 
+              nexusArtifactUploader artifacts: [[artifactId: 'devops-integration', classifier: '', file: 'target/devops-integration.jar', type: 'jar']], credentialsId: 'nexus3', groupId: 'com.truelearning', nexusUrl: '172.31.22.62:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'entpoint/', version: '0.0.1-SNAPSHOT' 
            }
         }
           stage('Build docker image'){
@@ -28,7 +28,7 @@ pipeline {
          }
         stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://3.90.191.95:9000"
+        SONAR_URL = "http://172.31.29.59:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
