@@ -4,7 +4,7 @@ pipeline {
         KUBECONFIG = '/var/lib/jenkins/workspace/k8s/' // Specify the path to your Kubernetes configuration file
     }
     stages{
-        stage('Git project Clone'){
+        stage('Project Clone from GIT'){
             steps{
                 git url:'https://github.com/manjugdr/cicd-with-K8S/', branch: "master"
                 }
@@ -41,7 +41,7 @@ pipeline {
         }
          }
        
-        stage('Docker login') {
+        stage('Docker Image Push to Docker Hub') {
             steps {
                 sshagent(['sshkeypair']) {
                 sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
