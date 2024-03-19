@@ -10,14 +10,14 @@ pipeline {
                 }
         }
         stage('SonarQube Analysis') {
-            steps {
+            steps{
                 withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonarqube') {
                     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=tes-project-k8s"
                 }
             }
         }
-         stage("Quality gate") {
-            steps {
+         stage("Quality gate"){
+            steps{
                 waitForQualityGate abortPipeline: true
             }
         }
