@@ -11,7 +11,7 @@ pipeline {
         }
          stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://172.31.29.59:9000"
+        SONAR_URL = "http://54.91.61.208:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -34,7 +34,7 @@ pipeline {
             steps{
                     script{
                        sshagent(['sshkeypair']) {
-                       sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
+                       sh "ssh -o StrictHostKeyChecking=no ubuntu@54.91.61.208"
                        sh 'scp -i chaithra.pem -r /var/lib/jenkins/workspace/tes-project-k8s/ ubuntu@172.31.29.59:/home/ubuntu/tes-project-k8s'
                        sh 'docker build -t manjugdr/endtoendproject:v1 .'
                 }
@@ -45,7 +45,7 @@ pipeline {
         stage('Docker Image Push to Docker Hub') {
             steps {
                 sshagent(['sshkeypair']) {
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.29.59"
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@54.91.61.208"
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
                     sh 'docker push manjugdr/endtoendproject:v1'
