@@ -11,7 +11,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps{
-                withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'sonarqube') {
+                withSonarQubeEnv(credentialsId: 'sonar-pwd', installationName: 'sonarqube') {
                     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=tes-project-k8s"
                 }
             }
