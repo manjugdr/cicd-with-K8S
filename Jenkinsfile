@@ -9,14 +9,13 @@ pipeline {
                 git url:'https://github.com/manjugdr/cicd-with-K8S/', branch: "master"
                 }
         }
-         stage('Static Code Analysis') {
+        stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://54.91.61.208:9000"
+        SONAR_URL = "http://172.31.29.59:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
           sh 'cd /var/lib/jenkins/workspace/tes-project-k8s && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-            waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
         }
       }
     }
