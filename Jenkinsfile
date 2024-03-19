@@ -16,8 +16,7 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
           sh 'cd /var/lib/jenkins/workspace/tes-project-k8s && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-            waitForQualityGate abortPipeline: false, credentialsId: 'sonarqube'
-        }
+                    }
       }
     }
      stage('Build Maven'){
@@ -25,7 +24,7 @@ pipeline {
                     sh 'mvn clean install'
             }
         }
-    stage('Publish to Nexus') {
+   stage('Publish to Nexus') {
             steps{
               nexusArtifactUploader artifacts: [[artifactId: 'devops-integration', classifier: '', file: 'target/devops-integration.jar', type: 'jar']], credentialsId: 'nexus3', groupId: 'com.truelearning', nexusUrl: '172.31.22.62:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'entpoint/', version: '0.0.1-SNAPSHOT' 
            }
